@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kiến Trúc HĐH & Quản Lý File - Buổi 02</title>
+    <meta name="description" content="Học cách hệ điều hành hoạt động, quản lý tệp tin và các quy chuẩn đặt tên của developer.">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="./style.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="bg-effects">
+        <div class="glow-orb orb-1"></div>
+        <div class="glow-orb orb-2"></div>
+        <div class="glow-orb orb-3"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar glass-panel">
+        <div class="nav-container">
+            <div class="logo">IT<span class="text-gradient">101</span></div>
+            <ul class="nav-links">
+                <li><a href="#os-intro">Hệ Điều Hành</a></li>
+                <li><a href="#kernel">Kiến trúc lõi</a></li>
+                <li><a href="#file-system">File System</a></li>
+                <li><a href="#paths">Đường dẫn</a></li>
+                <li><a href="#naming">Quy tắc đặt tên</a></li>
+                <li><a href="#security">Bảo mật</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero" id="os-intro">
+        <div class="container hero-content">
+            <span class="badge">Session 02</span>
+            <h1 class="title">Kiến trúc Hệ điều hành & <br><span class="text-gradient">Tư duy quản lý file</span></h1>
+            <p class="subtitle">Khám phá "Ban quản lý" của máy tính và cách một Developer chuyên nghiệp tổ chức dữ liệu.</p>
+            
+            <div class="os-model glass-panel mt-4">
+                <div class="os-layers">
+                    <div class="layer app-layer"><i class="fa-brands fa-chrome"></i> Ứng dụng (App)</div>
+                    <div class="layer-arrows"><i class="fa-solid fa-arrows-up-down"></i></div>
+                    <div class="layer os-layer highlight-layer">Hệ Điều Hành (Ban quản lý)</div>
+                    <div class="layer-arrows"><i class="fa-solid fa-arrows-up-down"></i></div>
+                    <div class="layer hw-layer"><i class="fa-solid fa-microchip"></i> Phần cứng (CPU, RAM, Ổ cứng)</div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- 4 Core Functions -->
+        <section class="section" id="functions">
+            <div class="section-header">
+                <h2>4 Chức năng Cốt lõi của <span class="text-gradient">HĐH</span></h2>
+            </div>
+            <div class="roles-grid">
+                <div class="role-card glass-panel" data-role="process">
+                    <div class="role-icon"><i class="fa-solid fa-microchip"></i></div>
+                    <h3>Quản lý Tiến trình</h3>
+                    <p class="role-alias">Chia thời gian CPU</p>
+                    <div class="role-hover-info">Giúp bạn vừa nghe nhạc, vừa soạn Word mà không app nào bị đứng hình.</div>
+                </div>
+                <div class="role-card glass-panel" data-role="memory">
+                    <div class="role-icon"><i class="fa-solid fa-memory"></i></div>
+                    <h3>Quản lý Bộ nhớ</h3>
+                    <p class="role-alias">Cấp phát RAM</p>
+                    <div class="role-hover-info">Khi bạn đóng Chrome, HĐH ngay lập tức thu hồi lại dung lượng RAM.</div>
+                </div>
+                <div class="role-card glass-panel" data-role="file">
+                    <div class="role-icon"><i class="fa-solid fa-folder-tree"></i></div>
+                    <h3>Quản lý File System</h3>
+                    <p class="role-alias">Tổ chức dữ liệu</p>
+                    <div class="role-hover-info">Tạo ra các thư mục Documents, Downloads để bạn sắp xếp file.</div>
+                </div>
+                <div class="role-card glass-panel" data-role="security">
+                    <div class="role-icon"><i class="fa-solid fa-shield-halved"></i></div>
+                    <h3>Giao diện & Bảo mật</h3>
+                    <p class="role-alias">Tương tác an toàn</p>
+                    <div class="role-hover-info">Chặn các ứng dụng độc hại thay đổi hệ thống khi chưa có sự cho phép.</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Kernel vs Shell -->
+        <section class="section" id="kernel">
+            <div class="section-header">
+                <h2>Kiến trúc <span class="text-gradient">Kernel vs Shell</span></h2>
+                <p>Khám phá cấu tạo bên trong hệ điều hành từ lõi ra vỏ.</p>
+            </div>
+            
+            <div class="architecture-layout">
+                <div class="circles-container glass-panel">
+                    <div class="circle circle-user">
+                        <span class="label">Người dùng</span>
+                        <div class="circle circle-shell">
+                            <span class="label">Shell (GUI / CLI)</span>
+                            <div class="circle circle-kernel">
+                                <span class="label">Kernel (Nhân)</span>
+                                <div class="circle circle-hw">
+                                    <span class="label">Phần cứng</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="arch-details glass-panel">
+                    <div class="arch-info">
+                        <h4 class="text-accent"><i class="fa-solid fa-bolt"></i> Kernel (Nhân)</h4>
+                        <p>Làm việc trực tiếp với phần cứng. Chạy ở chế độ đặc quyền cao nhất. Nếu Kernel lỗi, máy tính sẽ bị "Màn hình xanh".</p>
+                    </div>
+                    <div class="arch-info mt-4">
+                        <h4 class="text-accent"><i class="fa-solid fa-terminal"></i> Shell (Vỏ)</h4>
+                        <p>Lớp nhận lệnh của người dùng và dịch cho Kernel. Có 2 dạng:</p>
+                        <ul class="styled-list">
+                            <li><strong>GUI:</strong> Giao diện đồ họa (Chuột phải -> Tạo thư mục). Trực quan, dễ dùng.</li>
+                            <li><strong>CLI:</strong> Giao diện dòng lệnh (gõ <code>mkdir</code>). Nhanh, tự động hóa cao, vũ khí của Developer.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- OS Comparison -->
+        <section class="section">
+            <div class="section-header">
+                <h2>So sánh 3 <span class="text-gradient">Hệ điều hành phổ biến</span></h2>
+            </div>
+            <div class="domains-grid">
+                <div class="domain-card glass-panel text-center">
+                    <i class="fa-brands fa-windows domain-icon" style="color: #0ea5e9"></i>
+                    <h4>Windows</h4>
+                    <p class="domain-tool">Hơn 70% PC cá nhân</p>
+                    <p class="text-secondary mt-2 text-sm">Dễ dùng, phổ biến cho văn phòng, chơi game.</p>
+                </div>
+                <div class="domain-card glass-panel text-center">
+                    <i class="fa-brands fa-apple domain-icon" style="color: #cbd5e1"></i>
+                    <h4>macOS</h4>
+                    <p class="domain-tool">Nền tảng Unix</p>
+                    <p class="text-secondary mt-2 text-sm">Ổn định, bắt buộc dùng nếu muốn lập trình app iOS (Xcode).</p>
+                </div>
+                <div class="domain-card glass-panel text-center">
+                    <i class="fa-brands fa-linux domain-icon" style="color: #f59e0b"></i>
+                    <h4>Linux</h4>
+                    <p class="domain-tool">90% Máy chủ & Cloud</p>
+                    <p class="text-secondary mt-2 text-sm">Miễn phí, mã nguồn mở. Hầu hết website bạn làm sẽ chạy trên Linux.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- File System -->
+        <section class="section" id="file-system">
+            <div class="section-header">
+                <h2>Cây thư mục & <span class="text-gradient">Tư duy lưu trữ</span></h2>
+            </div>
+            <div class="hardware-compare">
+                <div class="compare-card glass-panel">
+                    <h4 class="text-center mb-4"><i class="fa-solid fa-hard-drive"></i> Ổ đĩa hệ thống vs dữ liệu</h4>
+                    <table class="compare-table">
+                        <tr>
+                            <th>Đặc điểm</th>
+                            <th>Ổ C:\ (Hệ thống)</th>
+                            <th>Ổ D:\, E:\ (Dữ liệu)</th>
+                        </tr>
+                        <tr>
+                            <td><strong>Vai trò</strong></td>
+                            <td>Chứa hệ điều hành & App cài đặt</td>
+                            <td class="text-success">Vùng an toàn cho dữ liệu học tập</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Khi cài lại Win</strong></td>
+                            <td class="text-danger">Thường bị xóa sạch mất dữ liệu</td>
+                            <td class="text-success">Dữ liệu vẫn nguyên vẹn</td>
+                        </tr>
+                    </table>
+                    <div class="warning-box mt-3">
+                        <i class="fa-solid fa-triangle-exclamation"></i>
+                        <span><strong>Lưu ý:</strong> Desktop, Downloads, Documents mặc định đều nằm trên ổ C:\. Hãy chủ động lưu vào ổ D:\ hoặc dùng Cloud (Google Drive/OneDrive).</span>
+                    </div>
+                </div>
+
+                <div class="glass-panel p-4">
+                    <h4 class="mb-3"><i class="fa-solid fa-users"></i> Thư mục người dùng (User Profile)</h4>
+                    <ul class="type-list">
+                        <li>
+                            <i class="fa-solid fa-desktop text-accent"></i>
+                            <div class="type-content">
+                                <strong>Desktop</strong>
+                                <span>Chỉ để shortcut. Đừng tích trữ file gây lag máy.</span>
+                            </div>
+                        </li>
+                        <li>
+                            <i class="fa-solid fa-download text-accent"></i>
+                            <div class="type-content">
+                                <strong>Downloads</strong>
+                                <span>Trạm trung chuyển, rất lộn xộn. Cần dọn dẹp hàng tuần.</span>
+                            </div>
+                        </li>
+                        <li>
+                            <i class="fa-solid fa-gears text-danger"></i>
+                            <div class="type-content">
+                                <strong>C:\Windows</strong>
+                                <span class="text-danger">Khu vực cấm. Không tự ý xóa sửa (như phòng kỹ thuật tòa nhà).</span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Paths -->
+        <section class="section" id="paths">
+            <div class="section-header">
+                <h2>Đường dẫn <span class="text-gradient">Tuyệt đối & Tương đối</span></h2>
+                <p>Cách Developer "chỉ đường" cho máy tính tìm file.</p>
+            </div>
+            
+            <div class="paths-layout glass-panel">
+                <div class="path-demo">
+                    <div class="path-type">
+                        <h4 class="text-accent">1. Đường dẫn Tuyệt đối (Absolute Path)</h4>
+                        <p>Luôn bắt đầu từ ổ đĩa gốc. Chính xác nhưng dễ lỗi khi chép sang máy khác.</p>
+                        <div class="code-box">C:\Users\Binh\HocTap\web-demo\images\logo.png</div>
+                    </div>
+                    
+                    <div class="path-type mt-4">
+                        <h4 class="text-accent">2. Đường dẫn Tương đối (Relative Path)</h4>
+                        <p>Tính từ "thư mục bạn đang đứng". An toàn, mang đi máy nào cũng chạy được.</p>
+                        <ul class="styled-list mb-2">
+                            <li>Dấu <code>.</code> (một chấm): Thư mục hiện tại</li>
+                            <li>Dấu <code>..</code> (hai chấm): Lùi lên thư mục cha</li>
+                            <li>Dấu <code>/</code> (gạch chéo): Chuẩn dùng cho Code/Linux/Web</li>
+                        </ul>
+                        <div class="code-box text-success">../images/logo.png</div>
+                    </div>
+                </div>
+
+                <div class="path-tree">
+                    <h4>Cây thư mục thực hành</h4>
+                    <div class="tree-structure">
+                        <div>📁 web-demo/</div>
+                        <div class="ml-4">📄 index.html</div>
+                        <div class="ml-4">📁 css/</div>
+                        <div class="ml-8">📄 style.css</div>
+                        <div class="ml-4">📁 images/</div>
+                        <div class="ml-8 text-pink font-bold">🖼️ logo.png</div>
+                        <div class="ml-4">📁 pages/</div>
+                        <div class="ml-8">📄 about.html <span class="badge-small bg-blue">Đang đứng đây</span></div>
+                    </div>
+                    <div class="tree-question mt-3">
+                        <p><strong>Hỏi:</strong> Từ <code>about.html</code>, trỏ đường dẫn tương đối tới <code>logo.png</code> như thế nào?</p>
+                        <p class="answer text-success mt-1"><strong>Đáp:</strong> Lùi lên 1 cấp <code>../</code> để về web-demo, rồi vào <code>images/logo.png</code> ➔ <code>../images/logo.png</code></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Naming Conventions -->
+        <section class="section" id="naming">
+            <div class="section-header">
+                <h2>Quy tắc đặt tên <span class="text-gradient">Chuẩn Developer</span></h2>
+            </div>
+            
+            <div class="naming-layout">
+                <div class="glass-panel p-4">
+                    <h3 class="mb-3 text-danger"><i class="fa-solid fa-ban"></i> 3 Điều Cấm Kỵ</h3>
+                    <ul class="type-list">
+                        <li>
+                            <i class="fa-solid fa-xmark text-danger"></i>
+                            <div class="type-content">
+                                <strong>Không gõ tiếng Việt có dấu</strong>
+                                <span>Dễ lỗi font khi tải lên server Linux (Bài tập -> Bi t?p)</span>
+                            </div>
+                        </li>
+                        <li>
+                            <i class="fa-solid fa-xmark text-danger"></i>
+                            <div class="type-content">
+                                <strong>Không dùng khoảng trắng</strong>
+                                <span>Terminal hiểu khoảng trắng là cắt lệnh.</span>
+                            </div>
+                        </li>
+                        <li>
+                            <i class="fa-solid fa-xmark text-danger"></i>
+                            <div class="type-content">
+                                <strong>Không dùng 9 ký tự hệ thống</strong>
+                                <span><code>\ / : * ? " < > |</code></span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="glass-panel p-4">
+                    <h3 class="mb-3"><i class="fa-solid fa-spell-check"></i> 4 Kiểu Đặt Tên (Case Styles)</h3>
+                    <div class="case-grid">
+                        <div class="case-item">
+                            <span class="case-name">kebab-case</span>
+                            <span class="case-eg">bao-cao-cuoi-ky.pdf</span>
+                            <span class="case-use">Tên File & Thư mục</span>
+                        </div>
+                        <div class="case-item">
+                            <span class="case-name">snake_case</span>
+                            <span class="case-eg">tinh_diem_tb.py</span>
+                            <span class="case-use">File/Biến Python</span>
+                        </div>
+                        <div class="case-item">
+                            <span class="case-name">camelCase</span>
+                            <span class="case-eg">diemTrungBinh</span>
+                            <span class="case-use">Biến JavaScript/Java</span>
+                        </div>
+                        <div class="case-item">
+                            <span class="case-name">PascalCase</span>
+                            <span class="case-eg">SinhVienCard</span>
+                            <span class="case-use">Class, React Component</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mini Game -->
+            <div class="mini-game glass-panel mt-4">
+                <h3 class="text-center mb-4">Trò chơi: Bắt lỗi tên file</h3>
+                <div class="game-board" id="naming-game">
+                    <!-- JS will populate this -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Security / Hidden files -->
+        <section class="section" id="security">
+            <div class="section-header">
+                <h2>Cảnh giác: <span class="text-gradient">Đuôi file & File ẩn</span></h2>
+                <p>Checklist cấu hình máy mới của Developer để không dính mã độc.</p>
+            </div>
+            
+            <div class="security-layout glass-panel p-5">
+                <div class="fake-file-demo">
+                    <div class="file-icon">
+                        <i class="fa-regular fa-file-pdf"></i>
+                        <span class="file-name">HoaDon.pdf<span class="hidden-ext text-danger">.exe</span></span>
+                    </div>
+                    <div class="file-warning">
+                        <p class="mb-2"><strong>Tuyệt chiêu lừa đảo:</strong> Kẻ gian gửi file giả dạng PDF, nhưng thực chất là phần mềm độc hại <code>.exe</code>.</p>
+                        <p>Bằng cách bật <strong>File name extensions</strong> (Đuôi file) trong View của File Explorer, bạn sẽ nhìn thấu vỏ bọc này!</p>
+                    </div>
+                </div>
+                
+                <div class="mt-4 border-top pt-4">
+                    <h4><i class="fa-solid fa-eye"></i> Bật Hidden Items (File ẩn)</h4>
+                    <p class="mt-2 text-secondary">Developer luôn làm việc với file ẩn cấu hình hệ thống: <code>.git</code> (lịch sử code), <code>.env</code> (chứa mật khẩu). <strong>Lưu ý: Thấy file ẩn lạ thì không được xóa!</strong></p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="footer glass-panel">
+        <div class="container text-center">
+            <p>"Hệ điều hành quản lý phần cứng. Bạn quản lý dữ liệu của mình: Đúng chỗ, Đúng đường, Đúng tên."</p>
+            <p class="footer-note">Biên soạn nội dung: IT-101 Nhập môn Công nghệ Thông tin - Buổi 02</p>
+        </div>
+    </footer>
+
+    <!-- Custom JS -->
+    <script src="./script.js"></script>
+</body>
+</html>
